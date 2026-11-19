@@ -21,7 +21,6 @@
   --color-ink-muted: #6e6e6e; /* secondary text; also field border (3:1+) */
   --color-accent-deep: #094020; /* deep green: text on hover of menu items, arrow icon on cards */
   --color-danger: #b42318; /* error text and error field border (proposed) */
-  --color-transparent: transparent; /* not a palette color: no fill / no border color */
 
   /* ---------- Text sizes (size / line height / tracking / weight) ---------- */
   --text-*: initial;

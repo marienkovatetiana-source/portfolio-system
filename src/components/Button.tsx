@@ -79,13 +79,14 @@ const sizesWithArrow: Record<ButtonSize, string> = {
   lg: "py-3 pl-8 pr-3",
 };
 
-// Round icon: inverted colors of the button; the button swaps on hover, so does the icon.
+// Round icon: deep green circle with a lime arrow; on the primary button the
+// colors swap on hover together with the button.
 const arrowStyle: Record<ButtonVariant, string> = {
   primary:
-    "bg-ink text-accent group-hover:bg-accent group-hover:text-ink",
-  secondary: "bg-ink text-accent",
-  ghost: "bg-ink text-accent",
-  soft: "bg-ink text-accent",
+    "bg-accent-deep text-accent group-hover:bg-accent group-hover:text-accent-deep",
+  secondary: "bg-accent-deep text-accent",
+  ghost: "bg-accent-deep text-accent",
+  soft: "bg-accent-deep text-accent",
 };
 const arrowDisabledStyle = "bg-line text-ink-muted";
 
@@ -115,7 +116,7 @@ function ArrowIcon({ className }: { className: string }) {
 // Working states: default + hover.
 const enabled: Record<ButtonVariant, string> = {
   primary:
-    "cursor-pointer border-accent bg-accent text-ink hover:border-ink hover:bg-ink hover:text-accent",
+    "cursor-pointer border-accent bg-accent text-ink hover:border-accent-deep hover:bg-accent-deep hover:text-accent",
   secondary:
     "cursor-pointer border-ink-muted bg-canvas text-ink hover:border-accent hover:bg-accent",
   ghost:
