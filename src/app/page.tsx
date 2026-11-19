@@ -6,11 +6,34 @@ import viseori from "@/assets/viseori-cover.jpg";
 import { Button } from "@/components/Button";
 import { Header } from "@/components/Header";
 import { PortraitCard } from "@/components/PortraitCard";
+import { ReviewCard } from "@/components/ReviewCard";
 import { WorkCard } from "@/components/WorkCard";
 
 // TODO: replace "#" with the real LinkedIn and resume (PDF) URLs.
 const linkedinHref = "#";
 const resumeHref = "#";
+
+// TODO: replace with real client reviews before publishing.
+const reviews = [
+  {
+    quote:
+      "Tetiana turned a messy brief into a clear, fast website. Our services finally make sense to visitors, and the enquiries we get are far more relevant.",
+    name: "Daniel Brooks",
+    role: "Operations Manager, logistics company",
+  },
+  {
+    quote:
+      "Design and code came from one person, so nothing got lost between the mockup and the live site. Communication was easy and deadlines were kept.",
+    name: "Sofia Marin",
+    role: "Marketing Lead, digital agency",
+  },
+  {
+    quote:
+      "Our new site looks premium and is simple to use on a phone. Clients now book online without calling us first.",
+    name: "Irina Volkova",
+    role: "Owner, beauty studio",
+  },
+];
 
 export default function Home() {
   return (
@@ -79,6 +102,20 @@ export default function Home() {
           <div>
             <Button href="#work" variant="secondary">
               All work
+            </Button>
+          </div>
+        </section>
+
+        <section id="reviews" className="flex flex-col gap-6 pb-section">
+          <h2 className="font-display text-heading text-ink">Client reviews</h2>
+          <div className="grid gap-6 md:grid-cols-3">
+            {reviews.map((review) => (
+              <ReviewCard key={review.name} {...review} />
+            ))}
+          </div>
+          <div>
+            <Button href="#contact" size="lg">
+              Get in touch
             </Button>
           </div>
         </section>
