@@ -1,0 +1,76 @@
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { Button } from "./Button";
+
+const meta = {
+  title: "Components/Button",
+  component: Button,
+  tags: ["autodocs"],
+  parameters: {
+    docs: {
+      description: {
+        component: `
+Кнопка для головних дій на сторінці: «View work», «Resume», «Написати мені».
+
+**Параметри**
+- \`variant\`: \`primary\` (за замовчуванням) або \`secondary\`.
+- \`size\`: \`md\` (за замовчуванням) або \`lg\`.
+- \`disabled\`: вимкнена кнопка (за замовчуванням вимкнено перемикач).
+- \`disabledReason\`: пояснення під вимкненою кнопкою.
+- решта атрибутів кнопки або посилання (\`onClick\`, \`type\`, \`aria-*\`) передаються далі.
+
+**Варіанти**
+- \`primary\`: заливка \`accent\`, текст \`ink\`. Одна на блок, головна дія.
+- \`secondary\`: без заливки, межа \`ink-muted\`, текст \`ink\`. Для другорядних дій поруч з основною.
+
+**Стани**
+- default: кольори варіанта.
+- hover: основна міняє кольори місцями (\`ink\` і \`accent\`), другорядна отримує заливку й межу \`accent\`.
+- focus: контур \`ink\` з відступом, видно при навігації клавішею Tab.
+- disabled: \`aria-disabled\`, заливка \`surface\`, межа \`line\`, текст \`ink-muted\`. Кнопка лишається у фокусі, натискання нічого не робить, пояснення під нею зв'язане через \`aria-describedby\`.
+
+**Токени**
+- Кольори: \`accent\`, \`ink\`, \`ink-muted\`, \`canvas\`, \`surface\`, \`line\`.
+- Текст: \`text-button\`, \`font-display\`; пояснення: \`text-caption\`, \`font-text\`.
+- Кути: \`rounded-control\`.
+- Відступи: \`md\` — \`px-6 py-3\`, \`lg\` — \`px-8 py-4\`, проміжок до пояснення \`gap-2\`.
+
+**Коли використовувати**
+Для дії, яку виконує користувач: відкрити, надіслати. Основна кнопка одна на екран чи блок. Для переходу на сторінку чи якір дай \`href\`: це посилання з виглядом кнопки.
+
+**Коли не використовувати**
+Не став кілька основних кнопок поруч. Не вимикай кнопку без пояснення: завжди додавай \`disabledReason\`.
+
+**Як брати в код**
+\`\`\`tsx
+import { Button } from "@/components/Button";
+
+<Button variant="primary" size="lg">View work</Button>
+<Button variant="secondary">Resume</Button>
+<Button href="#work" size="lg">View work</Button>
+<Button disabled disabledReason="Заповніть форму, щоб надіслати.">Надіслати</Button>
+\`\`\`
+`,
+      },
+    },
+  },
+  argTypes: {
+    variant: { control: "select", options: ["primary", "secondary"] },
+    size: { control: "select", options: ["md", "lg"] },
+    disabled: { control: "boolean" },
+    disabledReason: { control: "text" },
+    href: { control: "text", description: "Порожнє значення: кнопка; з адресою: посилання." },
+  },
+  args: {
+    children: "View work",
+    variant: "primary",
+    size: "md",
+    disabled: false,
+    disabledReason: "Заповніть форму, щоб надіслати.",
+    href: "",
+  },
+} satisfies Meta<typeof Button>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Playground: Story = {};
