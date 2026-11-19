@@ -6,7 +6,7 @@ import { Meta, ColorPalette, ColorItem, Unstyled } from "@storybook/addon-docs/b
 
 Єдине джерело значень — блок `@theme` у `src/app/globals.css`. Тут вони показані такими, як їх бачить сайт. Це чернетка v2: дивимось «на око» й виправляємо.
 
-## Кольори (7 ролей)
+## Кольори (8 ролей)
 
 <ColorPalette>
   <ColorItem
@@ -38,6 +38,11 @@ import { Meta, ColorPalette, ColorItem, Unstyled } from "@storybook/addon-docs/b
     title="ink-muted"
     subtitle="приглушений текст, межа поля · text-ink-muted"
     colors={["var(--color-ink-muted)"]}
+  />
+  <ColorItem
+    title="accent-deep"
+    subtitle="глибокий зелений: hover пункту меню, іконка на картці · text-accent-deep"
+    colors={["var(--color-accent-deep)"]}
   />
   <ColorItem
     title="danger"

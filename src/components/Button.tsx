@@ -8,7 +8,7 @@ import type {
   MouseEvent,
 } from "react";
 
-type ButtonVariant = "primary" | "secondary";
+type ButtonVariant = "primary" | "secondary" | "ghost" | "soft";
 type ButtonSize = "md" | "lg";
 
 interface ButtonBaseProps {
@@ -16,6 +16,8 @@ interface ButtonBaseProps {
    * Вигляд кнопки.
    * `primary` — основна дія, заливка `accent`.
    * `secondary` — другорядна дія, без заливки, межа `ink-muted`.
+   * `ghost` — тільки текст, без межі й заливки; для третьорядних дій (LinkedIn).
+   * `soft` — на «підложці» `surface` з м'якою тінню; для дій у шапці (Resume).
    * @default "primary"
    */
   variant?: ButtonVariant;
@@ -36,6 +38,12 @@ interface ButtonBaseProps {
    * Показується тільки коли `disabled` увімкнено.
    */
   disabledReason?: string;
+  /**
+   * Кругла іконка-стрілка праворуч від тексту. Стрілка повертається на 45°
+   * при hover і focus. Для основних дій на кшталт «View work».
+   * @default false
+   */
+  arrow?: boolean;
 }
 
 type ButtonAsButton = ButtonBaseProps &
@@ -64,12 +72,56 @@ const sizes: Record<ButtonSize, string> = {
   lg: "px-8 py-4",
 };
 
+// With the arrow icon the right padding is smaller: the round icon sits close
+// to the edge of the pill.
+const sizesWithArrow: Record<ButtonSize, string> = {
+  md: "py-2 pl-6 pr-2",
+  lg: "py-3 pl-8 pr-3",
+};
+
+// Round icon: inverted colors of the button; the button swaps on hover, so does the icon.
+const arrowStyle: Record<ButtonVariant, string> = {
+  primary:
+    "bg-ink text-accent group-hover:bg-accent group-hover:text-ink",
+  secondary: "bg-ink text-accent",
+  ghost: "bg-ink text-accent",
+  soft: "bg-ink text-accent",
+};
+const arrowDisabledStyle = "bg-line text-ink-muted";
+
+function ArrowIcon({ className }: { className: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`grid h-8 w-8 flex-none place-items-center rounded-control transition-colors ${className}`}
+    >
+      <svg
+        viewBox="0 0 14 14"
+        fill="none"
+        className="h-4 w-4 transition-transform group-hover:rotate-45 group-focus-visible:rotate-45"
+      >
+        <path
+          d="M4 10L10 4M10 4H5M10 4V9"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
+  );
+}
+
 // Working states: default + hover.
 const enabled: Record<ButtonVariant, string> = {
   primary:
     "cursor-pointer border-accent bg-accent text-ink hover:border-ink hover:bg-ink hover:text-accent",
   secondary:
     "cursor-pointer border-ink-muted bg-canvas text-ink hover:border-accent hover:bg-accent",
+  ghost:
+    "cursor-pointer border-transparent bg-transparent text-ink-muted hover:border-accent hover:bg-accent hover:text-ink hover:shadow-soft",
+  soft:
+    "cursor-pointer border-surface bg-surface text-ink shadow-soft hover:border-accent hover:bg-accent",
 };
 
 // Disabled: no hover change, muted text that still stays readable.
@@ -88,6 +140,7 @@ export function Button(props: ButtonProps) {
     size = "md",
     disabled = false,
     disabledReason,
+    arrow = false,
     className,
     children,
   } = props;
@@ -95,13 +148,23 @@ export function Button(props: ButtonProps) {
   const showReason = disabled && Boolean(disabledReason);
 
   const classes = [
+    "group",
     base,
-    sizes[size],
+    arrow ? `${sizesWithArrow[size]} gap-3` : sizes[size],
     disabled ? disabledStyle : enabled[variant],
     className,
   ]
     .filter(Boolean)
     .join(" ");
+
+  const content = (
+    <>
+      {children}
+      {arrow ? (
+        <ArrowIcon className={disabled ? arrowDisabledStyle : arrowStyle[variant]} />
+      ) : null}
+    </>
+  );
 
   let control;
   if (props.href) {
@@ -110,13 +173,14 @@ export function Button(props: ButtonProps) {
       size: _s,
       disabled: _d,
       disabledReason: _r,
+      arrow: _a,
       className: _c,
       children: _ch,
       href,
       onClick,
       ...rest
     } = props;
-    void [_v, _s, _d, _r, _c, _ch];
+    void [_v, _s, _d, _r, _a, _c, _ch];
     control = (
       <Link
         {...rest}
@@ -132,7 +196,7 @@ export function Button(props: ButtonProps) {
         }}
         className={classes}
       >
-        {children}
+        {content}
       </Link>
     );
   } else {
@@ -141,6 +205,7 @@ export function Button(props: ButtonProps) {
       size: _s,
       disabled: _d,
       disabledReason: _r,
+      arrow: _a,
       className: _c,
       children: _ch,
       href: _h,
@@ -148,7 +213,7 @@ export function Button(props: ButtonProps) {
       type = "button",
       ...rest
     } = props as ButtonAsButton;
-    void [_v, _s, _d, _r, _c, _ch, _h];
+    void [_v, _s, _d, _r, _a, _c, _ch, _h];
     control = (
       <button
         {...rest}
@@ -164,7 +229,7 @@ export function Button(props: ButtonProps) {
         }}
         className={classes}
       >
-        {children}
+        {content}
       </button>
     );
   }

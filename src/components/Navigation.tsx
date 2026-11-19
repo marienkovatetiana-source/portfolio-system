@@ -101,7 +101,7 @@ export function Navigation({
                 className={`block rounded-control px-4 py-3 font-display text-label transition-colors md:py-2 ${focusRing} ${
                   active
                     ? "bg-ink text-accent"
-                    : "text-ink-muted hover:bg-accent hover:text-ink"
+                    : "text-ink-muted hover:text-accent-deep"
                 }`}
               >
                 {item.label}

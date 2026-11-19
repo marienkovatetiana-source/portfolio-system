@@ -20,15 +20,18 @@
 
 ## Кольори
 
-Стандартну палітру Tailwind скинуто (`--color-*: initial`). Існує сім кольорів:
+Стандартну палітру Tailwind скинуто (`--color-*: initial`). Існує вісім кольорів:
 
 - `canvas` (#ffffff): фон сторінки. `bg-canvas`.
 - `surface` (#f9f9f7): картки й поля. `bg-surface`.
 - `line` (#e6e6e6): декоративні лінії й рамки карток. `border-line`.
-- `accent` (#dffca1, лайм): заливка основної кнопки, hover другорядної кнопки й пунктів меню. `bg-accent`.
+- `accent` (#dffca1, лайм): заливка основної кнопки, hover кнопок (secondary, ghost, soft). `bg-accent`.
 - `ink` (#0a0a0a): основний текст, активний пункт меню (`bg-ink` з текстом `accent`). `text-ink`.
 - `ink-muted` (#6e6e6e): приглушений текст, межа поля й кнопки без заливки (контраст ≥ 3:1). `text-ink-muted`, `border-ink-muted`.
+- `accent-deep` (#094020, глибокий зелений): текст пункту меню при hover (без заливки), іконка-стрілка на картці роботи. `hover:text-accent-deep`, `text-accent-deep`.
 - `danger` (#b42318): текст помилки й межа поля в помилці. `text-danger`, `border-danger`. Значення запропоноване, на макеті помилки не було.
+
+Крім восьми кольорів є `transparent` (`bg-transparent`, `border-transparent`): це не колір палітри, а відсутність кольору (прозорий фон чи межа).
 
 Прозорість: колір токена з модифікатором, наприклад `bg-canvas/60` (скло). Нового кольору це не створює.
 
@@ -47,16 +50,18 @@
 - Лише для сторінок, не для компонентів: `py-section` і `pb-section` (96 px між великими секціями), `max-w-page` (1200 px ширина контенту).
 - Радіуси: `rounded-control` (pill: кнопки, поля, пункти меню, аватар) і `rounded-card` (28 px: картки, портрет, шапка, плашки).
 - Пропорції: `aspect-cover` (9/5, обкладинка картки), `aspect-portrait` (4/5), `aspect-avatar` (1/1).
-- Ефекти: `backdrop-blur-glass` (матове скло шапки й плашок), `tilt-card` (нахил картки з портретом).
+- Ефекти: `backdrop-blur-glass` (матове скло шапки й плашок), `tilt-card` (нахил картки з портретом), `shadow-soft` (м'яка тінь), `bg-grid` (сітка-клітинка фону сторінки, клітинка `--grid-cell` 48 px, лінії кольору `line`, згасає донизу).
 
 ## Компоненти
 
 Кожен компонент має одну історію в Storybook `Components/<Назва>` з Controls і сторінку docs.
 
-- `Button`: `variant` `primary` (на `accent`) і `secondary` (без заливки, межа `ink-muted`); `size` `md` і `lg`; з `href` стає посиланням. Стани: default, hover, focus, disabled. Вимкнена: `disabled` дає `aria-disabled`, фокус лишається, пояснення в `disabledReason` зв'язане через `aria-describedby`.
+- `Button`: `variant` `primary` (на `accent`), `secondary` (без заливки, межа `ink-muted`), `ghost` (тільки текст, для LinkedIn) і `soft` (на `surface` з тінню `shadow-soft`, для Resume); `size` `md` і `lg`; з `href` стає посиланням; `arrow` додає круглу іконку-стрілку, що повертається на 45° при hover і focus. Стани: default, hover, focus, disabled. Вимкнена: `disabled` дає `aria-disabled`, фокус лишається, пояснення в `disabledReason` зв'язане через `aria-describedby`.
 - `FormField`: текстове поле з підписом над ним. Параметри `label`, `error`, `errorText`, `disabled`. Стани: default, hover, focus, заповнене, помилка (межа й текст `danger`, іконка), disabled.
-- `WorkCard`: картка роботи (обкладинка `aspect-cover`, назва, опис, `href`). Стани: default, hover, focus.
-- `Navigation`: пункти меню, `activeId` задає активний. Стани пункту: default, hover, focus, активний. На вузькому екрані (менше `md`) згортається в кнопку, відкрите меню лежить поверх контенту й закривається Escape.
+- `WorkCard`: картка роботи (обкладинка `aspect-cover` з круглою іконкою-стрілкою, назва, опис, `href`). Стани: default, hover (стрілка повертається на 45° і міняє кольори), focus.
+- `Navigation`: пункти меню, `activeId` задає активний. Стани пункту: default, hover (зелений текст), focus, активний. На вузькому екрані (менше `md`) згортається в кнопку, відкрите меню лежить поверх контенту й закривається Escape.
+- `Badge`: мітка-«пігулка» з лаймовою крапкою; єдиний вигляд для назв секцій (`as="h2"`) і ролі в hero.
+- `ReviewCard`: відгук замовника (текст, ім'я, роль), не клікабельний.
 - `Header`: липка шапка з брендом (аватар, ім'я), `Navigation` і слотом `actions`.
 - `PortraitCard`: портрет із нахилом `tilt-card` і плашкою імені й ролі.
 

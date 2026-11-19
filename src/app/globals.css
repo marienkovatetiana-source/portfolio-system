@@ -19,7 +19,9 @@
   --color-accent: #dffca1; /* lime: primary button fill, dot in badge */
   --color-ink: #0a0a0a; /* text */
   --color-ink-muted: #6e6e6e; /* secondary text; also field border (3:1+) */
+  --color-accent-deep: #094020; /* deep green: text on hover of menu items, arrow icon on cards */
   --color-danger: #b42318; /* error text and error field border (proposed) */
+  --color-transparent: transparent; /* not a palette color: no fill / no border color */
 
   /* ---------- Text sizes (size / line height / tracking / weight) ---------- */
   --text-*: initial;
@@ -68,6 +70,12 @@
 
   /* ---------- Effects ---------- */
   --blur-glass: 8px; /* frosted glass: backdrop-blur-glass */
+  /* soft layered shadow (soft button): shadow-soft; the color is `ink` with low opacity */
+  --shadow-soft:
+    0 0.6px 0.6px -0.94px color-mix(in srgb, var(--color-ink) 7%, transparent),
+    0 1.8px 1.8px -1.88px color-mix(in srgb, var(--color-ink) 7%, transparent),
+    0 4.8px 4.8px -2.8px color-mix(in srgb, var(--color-ink) 6%, transparent),
+    0 15px 15px -3.75px color-mix(in srgb, var(--color-ink) 3%, transparent);
 
   /* ---------- Image aspect ratios ---------- */
   --aspect-cover: 9 / 5; /* project card cover */
@@ -75,14 +83,33 @@
   --aspect-avatar: 1 / 1; /* avatar */
 }
 
-/* Tilt of the portrait card (class: tilt-card). A custom value that has no
-   built-in Tailwind namespace, so it is a static variable plus a utility. */
+/* Values that have no built-in Tailwind namespace: each is a static variable
+   plus a utility. */
 @theme static {
-  --tilt-card: 3deg;
+  --tilt-card: 3deg; /* tilt of the portrait card (class: tilt-card) */
+  --grid-cell: 48px; /* cell size of the page background grid (class: bg-grid) */
 }
 
 @utility tilt-card {
   rotate: var(--tilt-card);
+}
+
+/* Square grid for the page background; fades out towards the bottom.
+   Lines use the `line` color. The color in the mask only sets the alpha. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(
+      color-mix(in srgb, var(--color-line) 60%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-line) 60%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: var(--grid-cell) var(--grid-cell);
+  background-position: center top;
+  mask-image: linear-gradient(var(--color-ink) 40%, transparent);
 }
 
 /* Fonts refer to variables that next/font sets at runtime (see fonts.ts),

@@ -3,6 +3,7 @@ import okvada from "@/assets/okvada-cover.jpg";
 import plantin from "@/assets/plantin-cover.jpg";
 import portrait from "@/assets/portrait.webp";
 import viseori from "@/assets/viseori-cover.jpg";
+import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
 import { Header } from "@/components/Header";
 import { PortraitCard } from "@/components/PortraitCard";
@@ -37,16 +38,22 @@ const reviews = [
 
 export default function Home() {
   return (
-    <>
+    <div className="relative isolate">
+      <div
+        aria-hidden="true"
+        className="bg-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-screen"
+      />
       <Header
         brandName="Tetiana Marienkova"
         avatar={avatar}
         actions={
           <>
-            <Button href={linkedinHref} variant="secondary">
+            <Button href={linkedinHref} variant="ghost">
               LinkedIn
             </Button>
-            <Button href={resumeHref}>Resume (PDF)</Button>
+            <Button href={resumeHref} variant="soft">
+              Resume (PDF)
+            </Button>
           </>
         }
       />
@@ -54,16 +61,14 @@ export default function Home() {
       <main id="top" className="mx-auto max-w-page px-4 md:px-8">
         <section className="flex flex-col items-start gap-8 py-8 md:flex-row md:items-center md:py-section">
           <div className="flex flex-col items-start gap-6 md:w-2/3">
-            <p className="font-display text-label text-ink-muted">
-              UI/UX Designer &amp; Front-end Developer
-            </p>
+            <Badge>UI/UX Designer &amp; Front-end Developer</Badge>
             <h1 className="font-display text-heading text-ink md:text-display">
               I design and build websites for companies and entrepreneurs
             </h1>
             <p className="font-display text-body text-ink-muted md:text-lead">
               so their services are easy to understand, find and choose online.
             </p>
-            <Button href="#work" size="lg">
+            <Button href="#work" size="lg" arrow>
               View work
             </Button>
           </div>
@@ -78,7 +83,7 @@ export default function Home() {
         </section>
 
         <section id="work" className="flex flex-col gap-6 pb-section">
-          <h2 className="font-display text-heading text-ink">Selected work</h2>
+          <Badge as="h2">Selected work</Badge>
           <div className="grid gap-6 md:grid-cols-3">
             <WorkCard
               title="OKVADA"
@@ -107,19 +112,19 @@ export default function Home() {
         </section>
 
         <section id="reviews" className="flex flex-col gap-6 pb-section">
-          <h2 className="font-display text-heading text-ink">Client reviews</h2>
+          <Badge as="h2">Client reviews</Badge>
           <div className="grid gap-6 md:grid-cols-3">
             {reviews.map((review) => (
               <ReviewCard key={review.name} {...review} />
             ))}
           </div>
           <div>
-            <Button href="#contact" size="lg">
+            <Button href="#contact" size="lg" arrow>
               Get in touch
             </Button>
           </div>
         </section>
       </main>
-    </>
+    </div>
   );
 }

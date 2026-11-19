@@ -29,7 +29,8 @@ export interface WorkCardProps {
 
 /**
  * Картка роботи: обкладинка, назва, короткий опис. Уся картка — одне
- * посилання. Кути `rounded-card`, обкладинка за пропорцією `aspect-cover`.
+ * посилання. Кути `rounded-card`, обкладинка за пропорцією `aspect-cover`,
+ * на обкладинці кругла іконка-стрілка (скло з `accent`, колір `accent-deep`).
  */
 export function WorkCard({
   title,
@@ -51,6 +52,24 @@ export function WorkCard({
           sizes="(min-width: 1024px) 33vw, 100vw"
           className="object-cover object-top"
         />
+        <span
+          aria-hidden="true"
+          className="absolute bottom-3 left-3 grid h-8 w-8 place-items-center rounded-control border border-canvas/50 bg-accent/75 text-accent-deep backdrop-blur-glass transition-colors group-hover:bg-accent-deep/85 group-hover:text-accent group-focus-visible:bg-accent-deep/85 group-focus-visible:text-accent"
+        >
+          <svg
+            viewBox="0 0 14 14"
+            fill="none"
+            className="h-4 w-4 transition-transform group-hover:rotate-45 group-focus-visible:rotate-45"
+          >
+            <path
+              d="M4 10L10 4M10 4H5M10 4V9"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
       </div>
       <div className="flex flex-col gap-2 px-2 pb-2">
         <h3 className="font-display text-heading text-ink group-hover:underline">
