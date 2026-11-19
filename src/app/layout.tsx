@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { dmSans, inter } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Tetiana Marienkova — Portfolio",
+  title: "Tetiana Marienkova — UI/UX Designer & Front-end Developer",
   description:
-    "UI/UX Designer & Front-end Developer. Websites for companies and entrepreneurs.",
+    "I design and build websites for companies and entrepreneurs, so their services are easy to understand, find and choose online.",
 };
 
 export default function RootLayout({
@@ -13,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${dmSans.variable} ${inter.variable}`}>
       <body>{children}</body>
     </html>
   );

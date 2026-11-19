@@ -1,0 +1,165 @@
+import { Meta, ColorPalette, ColorItem, Unstyled } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Tokens" />
+
+# Токени
+
+Єдине джерело значень — блок `@theme` у `src/app/globals.css`. Тут вони показані такими, як їх бачить сайт. Це чернетка v2: дивимось «на око» й виправляємо.
+
+## Кольори (7 ролей)
+
+<ColorPalette>
+  <ColorItem
+    title="canvas"
+    subtitle="фон сторінки · bg-canvas"
+    colors={["var(--color-canvas)"]}
+  />
+  <ColorItem
+    title="surface"
+    subtitle="картки, поля · bg-surface"
+    colors={["var(--color-surface)"]}
+  />
+  <ColorItem
+    title="line"
+    subtitle="розділювачі й рамки карток · border-line"
+    colors={["var(--color-line)"]}
+  />
+  <ColorItem
+    title="accent"
+    subtitle="заливка основної кнопки · bg-accent"
+    colors={["var(--color-accent)"]}
+  />
+  <ColorItem
+    title="ink"
+    subtitle="текст · text-ink"
+    colors={["var(--color-ink)"]}
+  />
+  <ColorItem
+    title="ink-muted"
+    subtitle="приглушений текст, межа поля · text-ink-muted"
+    colors={["var(--color-ink-muted)"]}
+  />
+  <ColorItem
+    title="danger"
+    subtitle="помилка (запропоновано) · text-danger, border-danger"
+    colors={["var(--color-danger)"]}
+  />
+</ColorPalette>
+
+## Шрифти
+
+<Unstyled>
+<div className="flex flex-col gap-4">
+  <span className="block font-display text-heading">font-display — DM Sans. Заголовки, кнопки, меню, бейджі. Кирилиця: Привіт, світе.</span>
+  <span className="block font-text text-body">font-text — Inter. Описи, підписи, номери. Кирилиця: Привіт, світе.</span>
+</div>
+</Unstyled>
+
+## Розміри тексту (7)
+
+<Unstyled>
+<div className="flex flex-col gap-6">
+  <div>
+    <span className="block text-caption text-ink-muted">text-display</span>
+    <span className="block font-display text-display">I design and build websites</span>
+  </div>
+  <div>
+    <span className="block text-caption text-ink-muted">text-lead</span>
+    <span className="block font-display text-lead">so their services are easy to understand, find and choose online.</span>
+  </div>
+  <div>
+    <span className="block text-caption text-ink-muted">text-heading</span>
+    <span className="block font-display text-heading">Plantin Beauty Studio</span>
+  </div>
+  <div>
+    <span className="block text-caption text-ink-muted">text-button</span>
+    <span className="block font-display text-button">View work</span>
+  </div>
+  <div>
+    <span className="block text-caption text-ink-muted">text-body</span>
+    <span className="block font-text text-body">Multi-page website for a nail studio</span>
+  </div>
+  <div>
+    <span className="block text-caption text-ink-muted">text-label</span>
+    <span className="block font-display text-label">Work · Process · About · 01</span>
+  </div>
+  <div>
+    <span className="block text-caption text-ink-muted">text-caption</span>
+    <span className="block font-text text-caption">UI/UX Designer &amp; Front-end Developer</span>
+  </div>
+</div>
+</Unstyled>
+
+## Радіуси (2)
+
+<Unstyled>
+<div className="flex flex-wrap items-center gap-6">
+  <div className="flex flex-col gap-2">
+    <div className="h-8 w-8 rounded-control border border-line bg-surface" />
+    <span className="block text-caption">rounded-control</span>
+  </div>
+  <div className="flex flex-col gap-2">
+    <div className="h-8 w-8 rounded-card border border-line bg-surface" />
+    <span className="block text-caption">rounded-card</span>
+  </div>
+  <div className="flex flex-col gap-2">
+    <div className="rounded-control bg-accent px-6 py-2 font-display text-button">View work</div>
+    <span className="block text-caption">control на кнопці (pill)</span>
+  </div>
+</div>
+</Unstyled>
+
+## Відступи (5 кроків і section)
+
+<Unstyled>
+<div className="flex items-end gap-6">
+  <div className="h-2 w-2 bg-accent" />
+  <div className="h-3 w-3 bg-accent" />
+  <div className="h-4 w-4 bg-accent" />
+  <div className="h-6 w-6 bg-accent" />
+  <div className="h-8 w-8 bg-accent" />
+  <span className="block text-caption text-ink-muted">кроки spacing: 2, 3, 4, 6, 8</span>
+</div>
+</Unstyled>
+
+Відстань між великими секціями: `section` (спеціальний токен для сторінок).
+
+## Пропорції картинок
+
+<Unstyled>
+<div className="flex flex-wrap items-end gap-6">
+  <div className="flex flex-col gap-2">
+    <div className="aspect-cover w-section rounded-card bg-surface border border-line" />
+    <span className="block text-caption">aspect-cover</span>
+  </div>
+  <div className="flex flex-col gap-2">
+    <div className="aspect-portrait w-section rounded-card bg-surface border border-line" />
+    <span className="block text-caption">aspect-portrait</span>
+  </div>
+  <div className="flex flex-col gap-2">
+    <div className="aspect-avatar w-8 rounded-control bg-surface border border-line" />
+    <span className="block text-caption">aspect-avatar</span>
+  </div>
+</div>
+</Unstyled>
+
+## Ефекти й нахил
+
+<Unstyled>
+<div className="flex flex-wrap items-center gap-6">
+  <div className="relative overflow-hidden rounded-card border border-line bg-surface">
+    <div className="flex gap-3 p-3">
+      <div className="h-8 w-8 rounded-control bg-accent" />
+      <div className="h-8 w-8 rounded-control bg-ink" />
+    </div>
+    <div className="absolute inset-0 flex items-center justify-center bg-canvas/60 backdrop-blur-glass">
+      <span className="block text-caption">backdrop-blur-glass</span>
+    </div>
+  </div>
+  <div className="p-3">
+    <div className="tilt-card rounded-card border border-line bg-surface p-4">
+      <span className="block text-caption">tilt-card</span>
+    </div>
+  </div>
+</div>
+</Unstyled>
